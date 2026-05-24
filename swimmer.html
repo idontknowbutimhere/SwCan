@@ -21,21 +21,23 @@ const swimmer = swimmers.find(s => s.id === swimmerId);
 
 const profile = document.getElementById("profile");
 
-if (swimmer) {
+if (!swimmer) {
 
-  profile.innerHTML = `
-  
-    <h1>${swimmer.name}</h1>
-
-    <p>${swimmer.club} (${swimmer.year})</p>
-
-    <p>SW CAN ID: ${swimmer.id}</p>
-
-  `;
+  profile.innerHTML = "<h1>Swimmer not found</h1>";
 
 } else {
 
-  profile.innerHTML = "<h1>Swimmer not found</h1>";
+  profile.innerHTML = `
+    <h1>${swimmer.name}</h1>
+    <p>${swimmer.club} (${swimmer.year})</p>
+    <p>SW CAN ID: ${swimmer.id}</p>
+    
+    <hr>
+
+    <h2>Best Times</h2>
+    <p>100 Free: ${swimmer.bestTimes?.["100free"] ?? "N/A"}</p>
+    <p>200 Free: ${swimmer.bestTimes?.["200free"] ?? "N/A"}</p>
+  `;
 
 }
 
