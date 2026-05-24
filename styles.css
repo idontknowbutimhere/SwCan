@@ -1,11 +1,14 @@
 body {
   font-family: Arial, sans-serif;
-  margin: 20px;
-  background: #0f172a;
-  color: #e2e8f0;
+  margin: 0;
+  background: #0b1220;
+  color: #e5e7eb;
 }
 
 h1 {
+  margin: 0;
+  padding: 20px;
+  background: #0f1b33;
   color: #38bdf8;
 }
 
@@ -18,20 +21,37 @@ h1 a:hover {
   text-decoration: underline;
 }
 
+h2 {
+  margin-top: 20px;
+  color: #93c5fd;
+}
+
 input {
-  padding: 10px;
-  width: 100%;
-  max-width: 400px;
-  margin-bottom: 20px;
-  border-radius: 8px;
+  margin: 20px;
+  padding: 12px;
+  width: calc(100% - 40px);
+  max-width: 500px;
+  border-radius: 10px;
   border: none;
+  outline: none;
+}
+
+#results, #profile {
+  padding: 0 20px 40px 20px;
 }
 
 .card {
-  background: #1e293b;
-  padding: 10px;
+  background: #111c2e;
+  border: 1px solid #1f2a44;
+  padding: 15px;
   margin: 10px 0;
-  border-radius: 10px;
+  border-radius: 12px;
+  transition: 0.15s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  border-color: #38bdf8;
 }
 
 a {
@@ -42,32 +62,44 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+button {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: none;
+  background: #38bdf8;
+  color: #0b1220;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0ea5e9;
+}
+
 .gallery {
+  padding: 20px;
   display: flex;
-  gap: 10px;
+  gap: 15px;
   flex-wrap: wrap;
 }
 
-.gallery img {
-  border-radius: 8px;
-  cursor: pointer;
-  border: 2px solid #38bdf8;
-}
-
-button {
-  padding: 10px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-}
 .item {
-  display: inline-block;
-  margin: 10px;
+  background: #111c2e;
+  border-radius: 12px;
+  padding: 10px;
+  border: 1px solid #1f2a44;
   text-align: center;
 }
 
+.item img {
+  border-radius: 10px;
+  cursor: pointer;
+  border: 1px solid #334155;
+}
+
 .title {
-  margin-top: 5px;
+  margin-top: 8px;
   font-size: 14px;
-  color: #e2e8f0;
+  color: #cbd5e1;
 }
