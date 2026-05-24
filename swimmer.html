@@ -14,9 +14,7 @@
 <script>
 
 const params = new URLSearchParams(window.location.search);
-
 const swimmerId = params.get("id");
-
 const swimmer = swimmers.find(s => s.id === swimmerId);
 
 const profile = document.getElementById("profile");
@@ -28,15 +26,32 @@ if (!swimmer) {
 } else {
 
   profile.innerHTML = `
+  
     <h1>${swimmer.name}</h1>
-    <p>${swimmer.club} (${swimmer.year})</p>
-    <p>SW CAN ID: ${swimmer.id}</p>
-    
+    <p><strong>Club:</strong> ${swimmer.club}</p>
+    <p><strong>Birth Year:</strong> ${swimmer.year}</p>
+    <p><strong>SW CAN ID:</strong> ${swimmer.id}</p>
+
     <hr>
 
-    <h2>Best Times</h2>
+    <h2>🏊 Best Times</h2>
     <p>100 Free: ${swimmer.bestTimes?.["100free"] ?? "N/A"}</p>
     <p>200 Free: ${swimmer.bestTimes?.["200free"] ?? "N/A"}</p>
+
+    <hr>
+
+    <h2>🏁 Meets</h2>
+    ${swimmer.meets?.length ? swimmer.meets.map(meet => `
+      <div style="margin-bottom: 10px;">
+        <h3>${meet.name}</h3>
+        <p>${meet.date}</p>
+
+        ${meet.events.map(e => `
+          <p>${e.event}: ${e.time} (Rank ${e.rank})</p>
+        `).join("")}
+      </div>
+    `).join("") : "<p>No meets yet</p>"}
+
   `;
 
 }
