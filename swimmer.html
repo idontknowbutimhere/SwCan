@@ -16,6 +16,18 @@
 
 <script>
 
+function timeToSeconds(t) {
+  if (!t) return 9999;
+
+  const parts = t.split(":").map(Number);
+
+  if (parts.length === 2) {
+    return parts[0] * 60 + parts[1];
+  }
+
+  return Number(t);
+}
+
 const params = new URLSearchParams(window.location.search);
 const swimmerId = params.get("id");
 
@@ -25,12 +37,35 @@ const profile = document.getElementById("profile");
 
 if (!swimmer) {
 
-  profile.innerHTML = `
-    <h1>Swimmer not found</h1>
-    <p>Check the link or return home.</p>
-  `;
+  profile.innerHTML = "<h1>Swimmer not found</h1>";
 
 } else {
+
+  let standardsHTML = "";
+
+  for (const event in swimmer.bestTimes) {
+
+    const time = swimmer.bestTimes[event];
+    const std = standards[event];
+
+    if (!std) continue;
+
+    const t = timeToSeconds(time);
+
+    let level = "Below Standard";
+
+    if (t <= timeToSeconds(std.AAA)) level = "AAA";
+    else if (t <= timeToSeconds(std.AA)) level = "AA";
+    else if (t <= timeToSeconds(std.A)) level = "A";
+
+    standardsHTML += `
+      <div class="card">
+        <h3>${event}</h3>
+        <p>Time: ${time}</p>
+        <p>Standard: ${level}</p>
+      </div>
+    `;
+  }
 
   profile.innerHTML = `
   
@@ -42,9 +77,8 @@ if (!swimmer) {
 
     <hr>
 
-    <h2>🏊 Best Times</h2>
-    <p>100 Free: ${swimmer.bestTimes?.["100free"] ?? "N/A"}</p>
-    <p>200 Free: ${swimmer.bestTimes?.["200free"] ?? "N/A"}</p>
+    <h2>🏆 Standards Progress</h2>
+    ${standardsHTML}
 
     <hr>
 
