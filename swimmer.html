@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Swimmer Profile</title>
+</head>
+
+<body>
+
+<div id="profile"></div>
+
+<script src="data.js"></script>
+
+<script>
+
+const params = new URLSearchParams(window.location.search);
+
+const swimmerId = params.get("id");
+
+const swimmer = swimmers.find(s => s.id === swimmerId);
+
+const profile = document.getElementById("profile");
+
+if (swimmer) {
+
+  profile.innerHTML = `
+  
+    <h1>${swimmer.name}</h1>
+
+    <p>${swimmer.club} (${swimmer.year})</p>
+
+    <p>SW CAN ID: ${swimmer.id}</p>
+
+  `;
+
+} else {
+
+  profile.innerHTML = "<h1>Swimmer not found</h1>";
+
+}
+
+</script>
+
+</body>
+</html>
