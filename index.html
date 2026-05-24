@@ -35,7 +35,11 @@ search.addEventListener("input", () => {
 
       div.innerHTML = `
         <hr>
-        <h2>${swimmer.name}</h2>
+        <h2>
+  <a href="swimmer.html?id=${swimmer.id}">
+    ${swimmer.name}
+  </a>
+</h2>
         <p>${swimmer.club} (${swimmer.year})</p>
         <p>SW CAN ID: ${swimmer.id}</p>
       `;
