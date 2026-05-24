@@ -12,25 +12,57 @@
 
 <h2>📊 Canada Swim Standards</h2>
 
+<input id="search" placeholder="Search standards..." />
+
 <p>Click any image to open full screen</p>
 
-<div class="gallery">
+<div id="gallery" class="gallery">
 
-  <div class="item">
+  <div class="item" data-title="national age group standards">
     <a href="https://upload.wikimedia.org/wikipedia/commons/3/3f/Placeholder_view_vector.svg" target="_blank">
       <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Placeholder_view_vector.svg" width="200">
     </a>
     <p class="title">National Age Group Standards</p>
   </div>
 
-  <div class="item">
+  <div class="item" data-title="fnq qualification times">
     <a href="https://upload.wikimedia.org/wikipedia/commons/3/3f/Placeholder_view_vector.svg" target="_blank">
       <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Placeholder_view_vector.svg" width="200">
     </a>
     <p class="title">FNQ Qualification Times</p>
   </div>
 
+  <div class="item" data-title="provincial standards canada">
+    <a href="https://upload.wikimedia.org/wikipedia/commons/3/3f/Placeholder_view_vector.svg" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Placeholder_view_vector.svg" width="200">
+    </a>
+    <p class="title">Provincial Standards Canada</p>
+  </div>
+
 </div>
+
+<script>
+const search = document.getElementById("search");
+const items = document.querySelectorAll(".item");
+
+search.addEventListener("input", () => {
+
+  const query = search.value.toLowerCase();
+
+  items.forEach(item => {
+
+    const title = item.getAttribute("data-title");
+
+    if (title.includes(query)) {
+      item.style.display = "inline-block";
+    } else {
+      item.style.display = "none";
+    }
+
+  });
+
+});
+</script>
 
 </body>
 </html>
