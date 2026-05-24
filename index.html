@@ -9,7 +9,7 @@
 
 <h1>SwCan</h1>
 
-<input id="search" placeholder="Search swimmer...">
+<input id="search" placeholder="Search swimmer..." />
 
 <div id="results"></div>
 
@@ -36,10 +36,10 @@ search.addEventListener("input", () => {
       div.innerHTML = `
         <hr>
         <h2>
-  <a href="swimmer.html?id=${swimmer.id}">
-    ${swimmer.name}
-  </a>
-</h2>
+          <a href="swimmer.html?id=${swimmer.id}">
+            ${swimmer.name}
+          </a>
+        </h2>
         <p>${swimmer.club} (${swimmer.year})</p>
         <p>SW CAN ID: ${swimmer.id}</p>
       `;
