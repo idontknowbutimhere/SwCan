@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <title>SwCan</title>
   <link rel="stylesheet" href="styles.css">
@@ -12,48 +11,46 @@
 
 <input id="search" placeholder="Search swimmer..." />
 
-<div style="margin: 10px 0;">
-  <a href="standards.html">
-    <button>📊 Standards Sheets</button>
-  </a>
-</div>
-
 <div id="results"></div>
-
-<script src="data.js"></script>
 
 <script>
 const search = document.getElementById("search");
 const results = document.getElementById("results");
 
-search.addEventListener("input", () => {
+let swimmers = [];
 
-  const query = search.value.toLowerCase();
+// 🔥 LIVE BACKEND DATA ONLY
+fetch("http://127.0.0.1:5000/api/swimmers")
+  .then(res => res.json())
+  .then(data => {
+    swimmers = data;
+    render(swimmers);
+  });
+
+function render(list) {
   results.innerHTML = "";
 
-  swimmers
-    .filter(swimmer =>
-      swimmer.name.toLowerCase().includes(query)
-    )
-    .forEach(swimmer => {
+  list.forEach(s => {
+    const div = document.createElement("div");
+    div.className = "card";
 
-      const div = document.createElement("div");
-      div.className = "card";
+    div.innerHTML = `
+      <h2>
+        <a href="swimmer.html?id=${s.id}">
+          ${s.name}
+        </a>
+      </h2>
+      <p>${s.club} (${s.year})</p>
+      <p>ID: ${s.id}</p>
+    `;
 
-      div.innerHTML = `
-        <h2>
-          <a href="swimmer.html?id=${swimmer.id}">
-            ${swimmer.name}
-          </a>
-        </h2>
-        <p>${swimmer.club} (${swimmer.year})</p>
-        <p>SW CAN ID: ${swimmer.id}</p>
-      `;
+    results.appendChild(div);
+  });
+}
 
-      results.appendChild(div);
-
-    });
-
+search.addEventListener("input", () => {
+  const q = search.value.toLowerCase();
+  render(swimmers.filter(s => s.name.toLowerCase().includes(q)));
 });
 </script>
 
