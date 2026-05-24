@@ -5,20 +5,25 @@ const swimmers = [
     year: 2011,
     club: "RL Swim Club",
 
-    events: {
-      "100free": {
-        best: "56.21",
-        history: [
-          { meet: "Regional Champs", time: "56.21", date: "2025-03-12" }
-        ]
-      },
+    meets: [
+      {
+        name: "Regional Champs",
+        date: "2025-03-12",
+        source: "manual",
 
-      "200free": {
-        best: "2:05.10",
-        history: [
-          { meet: "Regional Champs", time: "2:05.10", date: "2025-03-12" }
+        events: [
+          {
+            event: "100 Free",
+            time: "56.21",
+            rank: 3
+          },
+          {
+            event: "200 Free",
+            time: "2:05.10",
+            rank: 5
+          }
         ]
       }
-    }
+    ]
   }
 ];
