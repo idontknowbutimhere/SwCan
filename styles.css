@@ -9,6 +9,15 @@ h1 {
   color: #38bdf8;
 }
 
+h1 a {
+  color: #38bdf8;
+  text-decoration: none;
+}
+
+h1 a:hover {
+  text-decoration: underline;
+}
+
 input {
   padding: 10px;
   width: 100%;
