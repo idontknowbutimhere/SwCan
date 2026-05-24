@@ -60,3 +60,14 @@ button {
   border: none;
   cursor: pointer;
 }
+.item {
+  display: inline-block;
+  margin: 10px;
+  text-align: center;
+}
+
+.title {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #e2e8f0;
+}
