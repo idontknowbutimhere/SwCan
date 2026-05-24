@@ -16,18 +16,6 @@
 
 <script>
 
-function timeToSeconds(t) {
-  if (!t) return 9999;
-
-  const parts = t.split(":").map(Number);
-
-  if (parts.length === 2) {
-    return parts[0] * 60 + parts[1];
-  }
-
-  return Number(t);
-}
-
 const params = new URLSearchParams(window.location.search);
 const swimmerId = params.get("id");
 
@@ -41,66 +29,32 @@ if (!swimmer) {
 
 } else {
 
-  let standardsHTML = "";
-
-  for (const event in swimmer.bestTimes) {
-
-    const time = swimmer.bestTimes[event];
-    const std = standards[event];
-
-    if (!std) continue;
-
-    const t = timeToSeconds(time);
-
-    let level = "Below Standard";
-
-    if (t <= timeToSeconds(std.AAA)) level = "AAA";
-    else if (t <= timeToSeconds(std.AA)) level = "AA";
-    else if (t <= timeToSeconds(std.A)) level = "A";
-
-    standardsHTML += `
-      <div class="card">
-        <h3>${event}</h3>
-        <p>Time: ${time}</p>
-        <p>Standard: ${level}</p>
-      </div>
-    `;
-  }
-
   profile.innerHTML = `
-  
     <h1>${swimmer.name}</h1>
 
     <p><strong>Club:</strong> ${swimmer.club}</p>
-    <p><strong>Birth Year:</strong> ${swimmer.year}</p>
-    <p><strong>SW CAN ID:</strong> ${swimmer.id}</p>
-
-    <hr>
-
-    <h2>🏆 Standards Progress</h2>
-    ${standardsHTML}
+    <p><strong>Year:</strong> ${swimmer.year}</p>
+    <p><strong>ID:</strong> ${swimmer.id}</p>
 
     <hr>
 
     <h2>🏁 Meets</h2>
 
     ${
-      swimmer.meets?.length
-        ? swimmer.meets.map(meet => `
-            <div class="card">
-              <h3>${meet.name}</h3>
-              <p>${meet.date}</p>
+      swimmer.meets.map(meet => `
+        <div class="card">
+          <h3>${meet.name}</h3>
+          <p>${meet.date}</p>
+          <p><em>Source: ${meet.source}</em></p>
 
-              ${meet.events.map(e => `
-                <p>${e.event}: ${e.time} (Rank ${e.rank})</p>
-              `).join("")}
-            </div>
-          `).join("")
-        : "<p>No meets yet</p>"
+          ${meet.events.map(e => `
+            <p>${e.event}: ${e.time} (Rank ${e.rank})</p>
+          `).join("")}
+        </div>
+      `).join("")
     }
 
   `;
-
 }
 
 </script>
