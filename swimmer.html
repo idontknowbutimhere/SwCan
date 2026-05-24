@@ -18,13 +18,17 @@
 
 const params = new URLSearchParams(window.location.search);
 const swimmerId = params.get("id");
+
 const swimmer = swimmers.find(s => s.id === swimmerId);
 
 const profile = document.getElementById("profile");
 
 if (!swimmer) {
 
-  profile.innerHTML = "<h1>Swimmer not found</h1>";
+  profile.innerHTML = `
+    <h1>Swimmer not found</h1>
+    <p>Check the link or return home.</p>
+  `;
 
 } else {
 
@@ -46,16 +50,20 @@ if (!swimmer) {
 
     <h2>🏁 Meets</h2>
 
-    ${swimmer.meets?.length ? swimmer.meets.map(meet => `
-      <div class="card">
-        <h3>${meet.name}</h3>
-        <p>${meet.date}</p>
+    ${
+      swimmer.meets?.length
+        ? swimmer.meets.map(meet => `
+            <div class="card">
+              <h3>${meet.name}</h3>
+              <p>${meet.date}</p>
 
-        ${meet.events.map(e => `
-          <p>${e.event}: ${e.time} (Rank ${e.rank})</p>
-        `).join("")}
-      </div>
-    `).join("") : "<p>No meets yet</p>"}
+              ${meet.events.map(e => `
+                <p>${e.event}: ${e.time} (Rank ${e.rank})</p>
+              `).join("")}
+            </div>
+          `).join("")
+        : "<p>No meets yet</p>"
+    }
 
   `;
 
