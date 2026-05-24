@@ -1,12 +1,51 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>SwCan</title>
 </head>
+
 <body>
 
 <h1>SwCan</h1>
-<p>Project starting point</p>
+
+<input id="search" placeholder="Search swimmer...">
+
+<div id="results"></div>
+
+<script src="data.js"></script>
+
+<script>
+const search = document.getElementById("search");
+const results = document.getElementById("results");
+
+search.addEventListener("input", () => {
+
+  const query = search.value.toLowerCase();
+
+  results.innerHTML = "";
+
+  swimmers
+    .filter(swimmer =>
+      swimmer.name.toLowerCase().includes(query)
+    )
+    .forEach(swimmer => {
+
+      const div = document.createElement("div");
+
+      div.innerHTML = `
+        <hr>
+        <h2>${swimmer.name}</h2>
+        <p>${swimmer.club} (${swimmer.year})</p>
+        <p>SW CAN ID: ${swimmer.id}</p>
+      `;
+
+      results.appendChild(div);
+
+    });
+
+});
+</script>
 
 </body>
 </html>
